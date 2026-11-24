@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "dply starter template (docs/starter-templates.md in dply-edge). Weekly, grouped, never automerged: dply's registry pins a SHA, bumped only after the template deploys.",
+  "extends": [
+    "config:recommended",
+    ":semanticCommitsDisabled"
+  ],
+  "forkProcessing": "enabled",
+  "timezone": "America/New_York",
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "prConcurrentLimit": 3,
+  "labels": [
+    "dependencies"
+  ],
+  "automerge": false,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 6am on the first day of the month"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "One PR for every minor and patch update",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "minor and patch"
+    },
+    {
+      "description": "Majors (frameworks and runtimes: .nvmrc, Go, Ruby) wait for approval on the dashboard, one decision each",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}
